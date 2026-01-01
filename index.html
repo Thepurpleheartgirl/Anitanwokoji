@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anita Nwokoji | Creative Professional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Base Styles */
         :root {
@@ -70,6 +71,8 @@
 
         section {
             padding: 100px 0;
+            /* make anchor targets sit below the fixed header on all screens */
+            scroll-margin-top: 100px;
         }
 
         .section-title {
@@ -115,6 +118,49 @@
         }
 
         /* Header & Navigation */
+        /* Animated reveals and typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Reveal animation utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.7s cubic-bezier(.2,.9,.2,1), transform 0.7s cubic-bezier(.2,.9,.2,1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered children utility */
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-stagger.in-view > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-stagger.in-view > *:nth-child(1) { transition-delay: 0.08s; }
+        .reveal-stagger.in-view > *:nth-child(2) { transition-delay: 0.16s; }
+        .reveal-stagger.in-view > *:nth-child(3) { transition-delay: 0.24s; }
+        .reveal-stagger.in-view > *:nth-child(4) { transition-delay: 0.32s; }
+
+        /* Respect user's reduce motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-stagger > * {
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
         header {
             position: fixed;
             top: 0;
@@ -421,8 +467,9 @@
 
         .videos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 40px;
+            /* allow the grid to adapt better on small screens */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
         }
 
         .video-card {
@@ -467,6 +514,32 @@
             height: 100%;
             border: none;
             object-fit: cover;
+            /* smooth transform/opacity for hover and interaction */
+            transition: transform 0.45s ease, opacity 0.35s ease;
+            opacity: 0.98;
+        }
+
+        /* Slight hover scale for videos to feel interactive */
+        .video-card:hover .video-container video {
+            transform: scale(1.03);
+            opacity: 1;
+        }
+
+        /* Ensure audio elements are responsive and animate nicely */
+        audio {
+            width: 100%;
+            margin-top: 12px;
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        .video-info {
+            padding: 25px;
+            background: white;
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        .video-card:hover .video-info {
+            transform: translateY(-6px);
         }
 
         .video-info {
@@ -1096,6 +1169,154 @@
             </div>
         </div>
     </section>
+    <!-- Additional Media Sections: Videography, Video Editing, Voiceover -->
+    <section class="videos" id="videography">
+        <div class="container">
+            <div class="section-title">
+                <h2>Videography</h2>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="video/videography3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Wedding Film — Highlights</h3>
+                        <p>Cinematic highlights capturing emotion and detail from a wedding day.</p>
+                        <span class="video-tag">Videography</span>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="video/videography1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Event Coverage — Community Talks</h3>
+                        <p>Full event coverage with multiple camera angles and natural sound.</p>
+                        <span class="video-tag">Videography</span>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="video/videography2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Short Film — Narrative</h3>
+                        <p>A short narrative film showcasing visual storytelling and composition.</p>
+                        <span class="video-tag">Videography</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="videos" id="video-editing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Video Editing</h2>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="video/video editing 1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Product Promo — Cut & Grade</h3>
+                        <p>Slick editing and color grading for a product promotional piece.</p>
+                        <span class="video-tag">Editing</span>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="video/video editing 2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Music Video — Edit Reel</h3>
+                        <p>Creative cut demonstrating pacing, rhythm edits, and VFX snippets.</p>
+                        <span class="video-tag">Editing</span>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-container">
+                        <video controls preload="metadata">
+                            <source src="video/video editing 3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="video-info">
+                        <h3>Documentary Cut — Short</h3>
+                        <p>A concise documentary edit demonstrating storytelling and pacing.</p>
+                        <span class="video-tag">Editing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="videos" id="voiceover">
+        <div class="container">
+            <div class="section-title">
+                <h2>Voiceover Demos</h2>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-info">
+                        <h3>Commercial Spot — Warm Tone</h3>
+                        <p>Sample commercial voiceover showcasing warmth and clarity.</p>
+                        <audio controls preload="metadata">
+                            <source src="music/Dear dad poem for iSabiTV .mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <span class="video-tag">Voice Over</span>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-info">
+                        <h3>Narration — Documentary</h3>
+                        <p>Documentary narration demo with steady pacing and presence.</p>
+                        <audio controls preload="metadata">
+                            <source src="music/Promotional Ads.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <span class="video-tag">Voice Over</span>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-info">
+                        <h3>IVR / Corporate — Professional</h3>
+                        <p>Short corporate/IVR demo demonstrating a polished, professional tone.</p>
+                        <audio controls preload="metadata">
+                            <source src="music/WIP VO.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <span class="video-tag">Voice Over</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -1264,13 +1485,32 @@
             });
         });
 
-        // Form Submission
+        // Form Submission — open user's email client with prefilled message (mailto)
         const contactForm = document.getElementById('contactForm');
-        
+
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                alert('Thank you for your message! I will get back to you soon.');
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                if (!name || !email || !message) {
+                    alert('Please fill in your name, email and message before sending.');
+                    return;
+                }
+
+                const recipient = 'Anitanwokoji5@gmail.com';
+                const subject = encodeURIComponent('Website message from ' + name);
+                const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+
+                const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+                // Open the user's default mail client with the prefilled message
+                window.location.href = mailtoLink;
+
+                // Optionally reset the form (user may still cancel sending in their mail client)
                 contactForm.reset();
             });
         }
@@ -1311,6 +1551,45 @@
         
         window.addEventListener('scroll', checkScroll);
         checkScroll(); // Run on initial load
+
+        // Reveal-on-scroll using IntersectionObserver
+        (function() {
+            const selectors = [
+                '.section-title h2',
+                '.hero-content h1',
+                '.hero-content p',
+                '.hero-btns',
+                '.service-card',
+                '.portfolio-item',
+                '.video-card',
+                '.video-info',
+                '.contact-info',
+                '.contact-form'
+            ];
+
+            const elements = document.querySelectorAll(selectors.join(','));
+
+            elements.forEach(el => {
+                // Add base reveal class; for groups we use reveal-stagger
+                if (el.children && el.children.length > 1 && (el.classList.contains('services-grid') || el.classList.contains('videos-grid'))) {
+                    el.classList.add('reveal-stagger');
+                } else {
+                    el.classList.add('reveal');
+                }
+            });
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        // If you want the reveal to happen only once, unobserve
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            elements.forEach(el => io.observe(el));
+        })();
     </script>
 
     <!-- Floating WhatsApp & Instagram buttons -->
@@ -1325,4 +1604,5 @@
         </a>
     </div>
 </body>
+    
 </html>
